@@ -72,15 +72,21 @@ This repository demonstrates:
    ```bash  
    helm install prometheus prometheus-community/prometheus --namespace monitoring --create-namespace  
    ```  
+   '''powershell
+   kubectl get svc -n monitoring 
+   Expose prometheus locally: Forward prometheus dashboard to local machine "kubectl port-forward -n monitoring svc/prometheus-server 9090:80"
 
 ---
 
 ## **Configuring Prometheus to Scrape Flask Metrics**  
 1. **Retrieve Flask App Service IP:**  
    ```bash  
-   kubectl get svc  
+   kubectl get svc 
    ```  
    Note the ClusterIP and port for `flask-metrics-app`.  
+   10.110.210.113 - 5000:32484/TCP
+
+   Update the prometheus configmap to add Flask app as scrape target: "kubectl edit configmap prometheus-server -n monitoring"
 2. **Edit Prometheus ConfigMap:**  
    Add your Flask app as a scrape target:  
    ```yaml  

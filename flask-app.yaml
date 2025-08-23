@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: flask-metrics-app
-        image: flask-metrics-app:latest
+        image: flask-metrics-app:v2
         imagePullPolicy: Never
         resources:
           limits:
